@@ -3,7 +3,21 @@
       <v-layout justify-center row wrap>
           <v-flex xs12>
               <div class="mb-3">
-                  <h1>Users</h1>
+                  <v-layout row wrap>
+                      <v-flex>
+                          <h1>Users</h1>
+                      </v-flex>
+                      <v-flex md4 xs12>
+                          <v-spacer></v-spacer>
+                          <v-text-field
+                            v-model="search"
+                            append-icon="search"
+                            label="Search"
+                            single-line
+                            hide-details
+                          ></v-text-field>
+                      </v-flex>
+                  </v-layout>
               </div>
               <v-data-table
                 :headers="headers"
@@ -11,6 +25,7 @@
                 hide-actions
                 class="elevation-1"
                 :loading="loading"
+                :search="search"
             >
                 <template slot="items" slot-scope="{ item }">
                 <td>{{ item.name }}</td>
@@ -64,7 +79,8 @@ export default {
                 }
             ],
             users: [],
-            loading: false
+            loading: false,
+            search: ''
         }
     },
     created () {
